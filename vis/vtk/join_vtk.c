@@ -658,7 +658,7 @@ static void write_joined_vtk(const char *out_name){
 static char *my_strdup(const char *in){
   char *out = (char *)malloc((1+strlen(in))*sizeof(char));
   if(out == NULL) {
-    fprintf(stderr,"my_strdup: failed to allocate %d\n",(1+strlen(in)));
+    fprintf(stderr,"my_strdup: failed to allocate %zd\n",(1+strlen(in)));
     return NULL; /* malloc failed */
   }
   return strcpy(out,in);
@@ -688,12 +688,12 @@ static void*** calloc_3d_array(size_t nt, size_t nr, size_t nc, size_t size){
   size_t i,j;
 
   if((array = (void ***)calloc(nt,sizeof(void**))) == NULL){
-    fprintf(stderr,"failed calloc_3d 1(%d)",nt);
+    fprintf(stderr,"failed calloc_3d 1(%zd)",nt);
     return NULL;
   }
 
   if((array[0] = (void **)calloc(nt*nr,sizeof(void*))) == NULL){
-    fprintf(stderr,"failed calloc_3d 2(%d)",nt*nr);
+    fprintf(stderr,"failed calloc_3d 2(%zd)",nt*nr);
     free((void *)array);
     return NULL;
   }
@@ -703,7 +703,7 @@ static void*** calloc_3d_array(size_t nt, size_t nr, size_t nc, size_t size){
   }
 
   if((array[0][0] = (void *)calloc(nt*nr*nc,size)) == NULL){
-    fprintf(stderr,"failed calloc_3d(%d,%d,%d,%d)",nt,nr,nr,size);
+    fprintf(stderr,"failed calloc_3d(%zd,%zd,%zd,%zd)",nt,nr,nr,size);
     free((void *)array[0]);
     free((void *)array);
     return NULL;
